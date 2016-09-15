@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+</head>
+<body>
+    <form th:object="${ide}" method="POST">
+		<h1 th:text="*{title}"></h1>
+	    <input type="text" name="title" th:value="*{title}"/>
+	    <input type="submit" value="set"/>
+	    <p th:text="${ideaFound}"/>
+    </form>
+    <table>
+    <thead>
+    <tr><td>Id</td></tr>
+    <tr><td>Topic</td></tr>
+    </thead>
+    <tbody>
+    <tr th:each="ide : ${ideer}">
+    <td th:text="${ide.id}">
+    1
+    </td>
+    <td th:text="${ide.title}">
+    f
+    </td>
+    </tr>
+   
+    
+    </tbody>
+    </table>
+    
+</body>
+</html>

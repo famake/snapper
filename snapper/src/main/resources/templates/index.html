@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>IdeWeb</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link rel="stylesheet" href="/jquery-ui.min.css" />
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.min.js"></script>
+    <script src="/ideweb.js"></script>
+</head>
+<body>
+    <h1 th:text="${overskriften}"></h1>
+    <form th:action="@{/ide}" th:object="${ide}" method="POST">
+    	<div>
+    	<input type="text" placeholder="Tittel" th:field="*{title}"/>
+    	</div>
+    	
+    	<div><textarea rows="10" cols="80" th:field="*{ide}"></textarea></div>
+    	
+    	<div>
+    	<input type="radio" th:id="bbb1" th:field="*{bbb}" value="1"/>
+    	<label for="bbb1">1</label>
+    	<input type="radio" th:id="bbb2" th:field="*{bbb}" value="2"/>
+    	<label for="bbb2">2</label>
+    	<input type="radio" th:id="bbb3" th:field="*{bbb}" value="3"/>
+    	<label for="bbb3">3</label>
+    	<input type="radio" th:id="bbb4" th:field="*{bbb}" value="4"/>
+    	<label for="bbb4">4</label>
+    	<input type="radio" th:id="bbb5" th:field="*{bbb}" value="5"/>
+    	<label for="bbb5">5</label>
+    	<input type="radio" th:id="bbb6" th:field="*{bbb}" value="6"/>
+    	<label for="bbb6">6</label>
+    	</div>
+    	
+    	<div>
+    	<select id="tags" th:field="*{tags}" multiple="multiple" style="display: none;">
+    		<option th:each="tag : ${allTags}"
+						th:value="${{tag}}"
+						th:text="${tag.title}">
+			</option>
+    	</select>
+    	<div id="selectedTags"></div>
+    	<input id="nextTag" />
+    	</div>
+    	<hr/>
+	    <input type="submit" value="Lagre"/>
+	    <input type="submit" name="avbryt" value="Avbryt"/>
+	    <input type="submit" name="slett" value="Slett" onclick="return confirm('Vil du virkelig gjøre dette?');"/>
+    </form>
+    <h1>Liste</h1>
+    <table>
+    <tr> 
+   		<th>Dato</th>
+   		<th>Ide</th>
+   	</tr>
+   	<tr th:each="ide : ${ideer}">
+   	<td th:text="${ide.dato}">
+   	
+   	</td>
+   	<td>
+   	<a th:href="@{/ide/{id}(id=${ide.id})}" th:text="${ide.title}"></a>
+   	</td>
+   	</tr>
+    </table>
+</body>
+</html>
